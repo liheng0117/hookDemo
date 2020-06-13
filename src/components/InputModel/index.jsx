@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Modal, Button, Form, Input, message } from 'antd'
 import { connect } from 'react-redux'
 import { addList, getList } from '@/actions/home'
@@ -20,13 +20,10 @@ const tailLayout = {
 
 function InputModel(props) {
   const { addList, getList } = props
-
   const [visible, setVisible] = useState(false)
-
   const showModal = () => {
     setVisible(!visible)
   }
-
   const onFinish = (values) => {
     addList(values).then((res) => {
       message.info(res.payload.info)
@@ -36,7 +33,6 @@ function InputModel(props) {
       setVisible(false)
     })
   }
-
   const onFinishFailed = (errorInfo) => {
     setVisible(false)
   }
