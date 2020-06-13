@@ -47,7 +47,7 @@ function Home(props) {
     })
   }
   // 修改
-  function updateFn(record) {
+  const updateFn = (record) => {
     setVisible(true)
     setTitle('修改')
     setFields(record)
@@ -57,9 +57,12 @@ function Home(props) {
     getList()
   }, [])
   // 添加
+  const addFn = () => {
+    setTitle('添加')
+    showModal()
+  }
   const showModal = () => {
     setVisible(!visible)
-    setTitle('添加')
   }
   // 确定表单
   const onFinish = (values) => {
@@ -87,7 +90,7 @@ function Home(props) {
   }
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={addFn}>
         添加
       </Button>
       <InputModel
@@ -96,6 +99,7 @@ function Home(props) {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         showModal={showModal}
+        fields={fields}
       />
       <Table columns={columns} dataSource={data} />
     </div>

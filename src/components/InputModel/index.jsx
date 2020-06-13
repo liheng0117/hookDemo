@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Modal, Button, Form, Input } from 'antd'
 
 const layout = {
@@ -16,13 +16,29 @@ const tailLayout = {
   },
 }
 
-function InputModel(props) {
-  const { title, visible, onFinish, onFinishFailed, showModal } = props
+export default function InputModel(props) {
+  const [form] = Form.useForm()
+  const { title, visible, onFinish, onFinishFailed, showModal, fields } = props
+  // 修改时表单回填 添加时表单清空
+  useEffect(() => {
+    if (title === '添加') {
+      form.resetFields()
+    } else {
+      form.setFieldsValue(fields)
+    }
+  })
   return (
     <div>
-      <Modal title={title} visible={visible} footer={[]}>
+      <Modal
+        title={title}
+        visible={visible}
+        footer={[]}
+        onCancel={showModal}
+        getContainer={false}
+      >
         <Form
           {...layout}
+          form={form}
           name="basic"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -52,5 +68,3 @@ function InputModel(props) {
     </div>
   )
 }
-
-export default InputModel
