@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { Modal, Button, Form, Input, message } from 'antd'
-import { connect } from 'react-redux'
-import { addList, getList } from '@/actions/home'
+import React from 'react'
+import { Modal, Button, Form, Input } from 'antd'
 
 const layout = {
   labelCol: {
@@ -19,34 +17,10 @@ const tailLayout = {
 }
 
 function InputModel(props) {
-  const { addList, getList } = props
-  const [visible, setVisible] = useState(false)
-  const showModal = () => {
-    setVisible(!visible)
-  }
-  const onFinish = (values) => {
-    addList(values).then((res) => {
-      message.info(res.payload.info)
-      if (res.payload.status === '200') {
-        getList()
-      }
-      setVisible(false)
-    })
-  }
-  const onFinishFailed = (errorInfo) => {
-    setVisible(false)
-  }
+  const { title, visible, onFinish, onFinishFailed, showModal } = props
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
-        添加
-      </Button>
-      <Modal
-        title="Basic Modal"
-        visible={visible}
-        footer={[]}
-        onCancel={showModal}
-      >
+      <Modal title={title} visible={visible} footer={[]}>
         <Form
           {...layout}
           name="basic"
@@ -79,12 +53,4 @@ function InputModel(props) {
   )
 }
 
-export default connect(
-  (state) => {
-    return {}
-  },
-  {
-    addList,
-    getList,
-  }
-)(InputModel)
+export default InputModel

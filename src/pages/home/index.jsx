@@ -1,22 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Space, Button, message, Form, Input, Modal } from 'antd'
+import { Table, Space, Button, message } from 'antd'
 import { connect } from 'react-redux'
 import { getList, delList, addList, updateList } from '@/actions/home'
+import InputModel from '@@/InputModel'
 
-const layout = {
-  labelCol: {
-    span: 6,
-  },
-  wrapperCol: {
-    span: 12,
-  },
-}
-const tailLayout = {
-  wrapperCol: {
-    offset: 6,
-    span: 12,
-  },
-}
 function Home(props) {
   const [visible, setVisible] = useState(false)
   const [title, setTitle] = useState('添加')
@@ -98,42 +85,18 @@ function Home(props) {
   const onFinishFailed = (errorInfo) => {
     setVisible(false)
   }
-
   return (
     <div>
       <Button type="primary" onClick={showModal}>
         添加
       </Button>
-      <Modal title={title} visible={visible} footer={[]} onCancel={showModal}>
-        <Form
-          {...layout}
-          name="basic"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          initialValues={fields}
-        >
-          <Form.Item label="姓名" name="name">
-            <Input />
-          </Form.Item>
-
-          <Form.Item label="年龄" name="age">
-            <Input />
-          </Form.Item>
-
-          <Form.Item label="地址" name="msg">
-            <Input />
-          </Form.Item>
-
-          <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
-              确定
-            </Button>
-            <Button style={{ marginLeft: '10px' }} onClick={showModal}>
-              取消
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+      <InputModel
+        title={title}
+        visible={visible}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        showModal={showModal}
+      />
       <Table columns={columns} dataSource={data} />
     </div>
   )
