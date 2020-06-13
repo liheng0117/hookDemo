@@ -21,6 +21,9 @@ export default function home(state = defaultState, action) {
     case FETCH_HOME_DEL:
       return action.payload
     case FETCH_HOME_UPDATE:
+      action.payload.data.forEach((v) => {
+        v.key = v.id
+      })
       return action.payload
     default:
       return state
