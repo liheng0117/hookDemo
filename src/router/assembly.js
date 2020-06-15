@@ -1,4 +1,4 @@
-import Loadable from '@@/Loadable'
+import { Loadable } from '@@'
 
 const Home = Loadable(() => import('@/pages/home'))
 const Login = Loadable(() => import('@/pages/login'))

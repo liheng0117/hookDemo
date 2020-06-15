@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Table, Space, Button, message } from 'antd'
 import { connect } from 'react-redux'
 import { getList, delList, addList, updateList } from '@/actions/home'
-import InputModel from '@@/InputModel'
+import { InputModel } from '@@'
 
 function Home(props) {
   const [visible, setVisible] = useState(false)
